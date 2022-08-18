@@ -7,7 +7,7 @@ import { validate } from "class-validator";
 
 class AuthController {
   static login = async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+    const { username, password, userId } = req.body;
     if (!(username && password)) {
       return res
         .status(400)

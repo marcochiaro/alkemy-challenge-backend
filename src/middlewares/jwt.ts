@@ -7,7 +7,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
   let jwtPayLoad: any;
   try {
     jwtPayLoad = <any>jwt.verify(token, config.jwtSecret);
-    res.locals.jwtPayLoad = jwtPayLoad;
+    // res.locals.jwtPayLoad = jwtPayLoad;
   } catch (error) {
     return res.status(401).json({ message: "Not authorized" });
   }
@@ -17,5 +17,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     expiresIn: "1h",
   });
   res.setHeader("token", newToken);
+
+  req.body.userId = userId;
   next();
 };
