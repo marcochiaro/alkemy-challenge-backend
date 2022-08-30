@@ -59,7 +59,7 @@ export const edit = async (id: number, operation: OpType) => {
     throw new Error("Operation not found.");
   }
 
-  //validation, second parameter(validationOpt objecr) is for avoiding show specific data of the returned error array from "valdiate" method.
+  //validation, second parameter(validationOpt object) is for avoiding show specific data of the returned error array from "valdiate" method.
   const validationOptions = {
     validationError: { target: false, value: false },
   };
