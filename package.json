@@ -22,7 +22,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.14.1",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "0.3.7"
+    "typeorm": "^0.3.7"
   },
   "scripts": {
     "tsc": "tsc",

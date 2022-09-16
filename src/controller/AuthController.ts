@@ -5,8 +5,8 @@ import config from "../config/config";
 import * as jwt from "jsonwebtoken";
 import { validate } from "class-validator";
 
-class AuthController {
-  static login = async (req: Request, res: Response) => {
+
+export const login = async (req: Request, res: Response) => {
     const { username, password, userId } = req.body;
     if (!(username && password)) {
       return res
@@ -39,8 +39,10 @@ class AuthController {
       { expiresIn: "1h" }
     );
     res.json({ message: "OK", token });
-  };
-  static changePass = async (req: Request, res: Response) => {
+};
+
+
+export const changePass = async (req: Request, res: Response) => {
     const { userId } = res.locals.jwtPayload;
     const { oldPass, newPass } = req.body;
 
@@ -70,7 +72,4 @@ class AuthController {
     user.hashPassword();
     userRepository.save(user);
     res.json({ message: "Password successfully updated." });
-  };
-}
-
-export default AuthController;
+};

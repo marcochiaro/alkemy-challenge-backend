@@ -3,8 +3,7 @@ import { User } from "../entity/User";
 import { AppDataSource } from "../data-source";
 import { validate } from "class-validator";
 
-export class UserController {
-  static getAll = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response) => {
     try {
       const userRepository = AppDataSource.getRepository(User);
       const users = await userRepository.find();
@@ -17,8 +16,9 @@ export class UserController {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  };
-  static getUserById = async (req: Request, res: Response) => {
+};
+
+export const getUserById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const userRepository = AppDataSource.getRepository(User);
     try {
@@ -29,8 +29,9 @@ export class UserController {
     } catch (error) {
       res.status(404).json({ message: "No results" });
     }
-  };
-  static newUser = async (req: Request, res: Response) => {
+};
+
+export const newUser = async (req: Request, res: Response) => {
     const { username, password, role } = req.body;
 
     //Creating a new instance of User entity as an actual new user,
@@ -61,8 +62,9 @@ export class UserController {
 
     //All OK
     res.send("User created");
-  };
-  static editUser = async (req: Request, res: Response) => {
+};
+
+export const editUser = async (req: Request, res: Response) => {
     let user: User;
     const { id } = req.params;
     const { username, role } = req.body;
@@ -95,8 +97,9 @@ export class UserController {
     res.status(201).json({
       message: "User succesfully updated.",
     });
-  };
-  static deleteUser = async (req: Request, res: Response) => {
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     const userRepository = AppDataSource.getRepository(User);
     let user: User;
@@ -112,6 +115,4 @@ export class UserController {
     //Remove user
     userRepository.delete(id);
     res.status(201).json({ message: "User succesfully deleted" });
-  };
-}
-export default UserController;
+};
