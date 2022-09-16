@@ -50,6 +50,8 @@ export const newUser = async (req: Request, res: Response) => {
 
     //TODO: HASH PASSWORD
 
+    //TODO: Modularize the get repository and all the db logic into services, and only leave the trycatch and call the function in here. check operations logic
+
     const userRepository = AppDataSource.getRepository(User);
 
     try {
@@ -59,14 +61,14 @@ export const newUser = async (req: Request, res: Response) => {
       return res.status(409).json({ message: "Username already exist." });
     }
 
-    //All OK
+    //Everything OK
     res.send("User created");
 };
 
 export const editUser = async (req: Request, res: Response) => {
     let user: User;
     const { id } = req.params;
-    const { username, role } = req.body;
+    const { username } = req.body;
     const userRepository = AppDataSource.getRepository(User);
 
     //Try get user
@@ -79,7 +81,7 @@ export const editUser = async (req: Request, res: Response) => {
       return res.status(404).json({ mesagge: "User not found." });
     }
 
-    //validation, second parameter(validationOpt objecr) is for avoiding show specific data of the returned error array from "valdiate" method.
+    //validation, second parameter(validationOpt object) is for avoiding show specific data of the returned error array from "valdiate" method.
     const validationOpt = { validationError: { target: false, value: false } };
     const errors = await validate(user, validationOpt);
     if (errors.length > 0) {
