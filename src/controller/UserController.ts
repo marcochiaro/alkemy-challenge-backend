@@ -32,7 +32,7 @@ export const getUserById = async (req: Request, res: Response) => {
 };
 
 export const newUser = async (req: Request, res: Response) => {
-    const { username, password, role } = req.body;
+    const { username, password } = req.body;
 
     //Creating a new instance of User entity as an actual new user,
     //and then setting it's properties with the data destructured from de request body.
@@ -40,7 +40,6 @@ export const newUser = async (req: Request, res: Response) => {
 
     user.username = username;
     user.password = password;
-    user.role = role;
 
     //validation
     const validationOpt = { validationError: { target: false, value: false } };
@@ -76,7 +75,6 @@ export const editUser = async (req: Request, res: Response) => {
         where: { id: parseInt(id) },
       });
       user.username = username;
-      user.role = role;
     } catch (error) {
       return res.status(404).json({ mesagge: "User not found." });
     }
