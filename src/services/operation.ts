@@ -15,7 +15,7 @@ export const findOneOrFail = async (id: number) => {
   });
 };
 
-export const findAll = async () => {
+export const findAll = async (userId: number) => {
   const operationRepository = AppDataSource.getRepository(Operation);
   return await operationRepository.find();
 };

@@ -4,8 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
 import { IsNotEmpty, MaxLength } from "class-validator";
+import { User } from "./User";
 
 export enum OperationType {
   ENTRY = "ENTRY",
@@ -16,6 +18,9 @@ export enum OperationType {
 export class Operation {
   @PrimaryGeneratedColumn()
   id: number;
+
+  // @ManyToOne(() => User, (user) => user.operations)
+  // user: User;
 
   @Column()
   @MaxLength(120)

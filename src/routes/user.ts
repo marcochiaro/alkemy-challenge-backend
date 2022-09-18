@@ -1,7 +1,12 @@
 import { Router } from "express";
-import { getUserById, deleteUser, getAll, newUser, editUser } from "../controller/UserController";
+import {
+  getUserById,
+  deleteUser,
+  getAll,
+  newUser,
+  editUser,
+} from "../controller/UserController";
 import { checkJwt } from "../middlewares/jwt";
-import { checkRole } from "../middlewares/role";
 
 const router = Router();
 
@@ -9,23 +14,15 @@ const router = Router();
 router.get("/", [checkJwt], getAll);
 
 //Get specific user
-router.get(
-  "/:id",
-  [checkJwt],
-  getUserById
-);
+router.get("/:id", [checkJwt], getUserById);
 
 //Create new user
-router.post("/", [checkJwt], newUser);
+router.post("/", newUser);
 
 //Edit user
 router.patch("/:id", [checkJwt], editUser);
 
 //Delete user
-router.delete(
-  "/:id",
-  [checkJwt],
-  deleteUser
-);
+router.delete("/:id", [checkJwt], deleteUser);
 
 export default router;

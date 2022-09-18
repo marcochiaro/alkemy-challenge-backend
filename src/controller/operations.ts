@@ -10,7 +10,7 @@ import {
 //TODO: PAGINATION
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const operations = await findAll();
+    const operations = await findAll(req.body.userId);
     return res.status(200).send({ data: operations });
   } catch (error) {
     return res.status(500).json({ message: error.message });

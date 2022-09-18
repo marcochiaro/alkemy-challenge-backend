@@ -3,10 +3,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { MinLength, IsNotEmpty, IsEmail } from "class-validator";
 import * as bcrypt from "bcryptjs";
+import { Operation } from "./Operation";
 
 @Entity()
 export class User {
@@ -32,8 +34,10 @@ export class User {
   @UpdateDateColumn()
   updateAt: Date;
 
-  //Encrypting pass
+  // @OneToMany(() => Operation, (operation) => operation.user)
+  // operations: Operation[];
 
+  //Encrypting pass
   hashPassword(): void {
     const salt = bcrypt.genSaltSync(10);
     this.password = bcrypt.hashSync(this.password, salt);

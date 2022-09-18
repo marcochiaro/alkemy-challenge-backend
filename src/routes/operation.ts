@@ -7,6 +7,7 @@ import {
 } from "../controller/operations";
 
 import { Router } from "express";
+import { checkJwt } from "../middlewares/jwt";
 
 const router = Router();
 
